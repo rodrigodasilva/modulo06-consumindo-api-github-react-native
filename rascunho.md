@@ -197,3 +197,49 @@ if (__DEV__) {
 4. Importamos no arquivo desejado e toda vez que realizarmos um 'console.tron.log()' ele vai aparecer na timeline do reactotron
 
 ## React Navigation
+
+- Criamos um arquivo 'routes.js' na pasta 'src'
+- Importamos o modulo para navegação e junto com ele um para os gestos na tela
+  > yarn add react-navigation react-native-gesture-handler
+- Acessamos o arquivo 'MainActivity.java' e colamos o código abaixo
+
+No import
+
+```
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
+```
+
+Dentro da classe
+
+```
+@Override
+protected ReactActivityDelegate createReactActivityDelegate() {
+  return new ReactActivityDelegate(this, getMainComponentName()) {
+    @Override
+    protected ReactRootView createRootView() {
+      return new RNGestureHandlerEnabledRootView(MainActivity.this);
+    }
+  };
+}
+```
+
+- Adicionamos a biblioteca 'jetifier' para tratar uma incompatibilidade da biblioteca 'gestureHanlder'
+
+  > yarn add jetifier -D
+
+- Vamos até 'package.json' e adicionamos no script
+
+```
+"postinstall": "npx jetify"
+```
+
+- E rodamos o 'yarn' para atualizar as depencias
+- Apos isso o app novamente, pois fizemos uma alteração nativa, por isso precisamos reinstalar o app
+
+### Metodos utilizados para as rotas
+
+- createAppContainer: é como se fosse o browserRouter do reactJS, ele contem as configurações pro nosso roteamento funcionar. Ele precisa sempre estar por volta das rotas
+- createStackNavigator: contem um tipo de configuração de rotas
