@@ -103,7 +103,7 @@ insert_final_newline = true
 
 7) Configuramos o arquivo '.eslintrc.js'
 
-```
+```js
 module.exports = {
   env: {
     es6: true,
@@ -112,6 +112,7 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
+    __DEV__: 'readonly',
   },
   parser: 'babel-eslint',
   parserOptions: {
@@ -124,16 +125,15 @@ module.exports = {
   plugins: ['react', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
-    'react/jsx-filename-extension': ['warn', {extensions: ['.jsx', '.js']}],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
     'import/prefer-default-export': 'off',
   },
 };
-
 ```
 
 8. Criamos um arquivo '.prettierrc' para resolver problema de regras duplicadas entre o ESlint e o Prettier na raiz do projeto
 
-```
+```js
 {
   "singleQuote": true,
   "trailingComma": "es5"
@@ -142,7 +142,7 @@ module.exports = {
 
 9. No arquivo 'settings.json' do VSCode inserimos as configurações abaixo
 
-```
+```js
 "eslint.autoFixOnSave": true,
 "eslint.validate": [
   {
@@ -164,3 +164,36 @@ module.exports = {
 - Ferramenta de debug
 
 1. Baixamos a ferramenta no site e instalamos no sistema
+2. Adicionamos o pacote ao projeto
+   > yarn add reactotron-react-native
+3. Criamos uma pasta 'src' na raiz do projeto, e nela uma pasta 'config' com o arquivo 'ReactotronConfig.js'
+
+```js
+import Reactotron from 'reactotron-react-native';
+
+//  _DEV_ - variavel global do react-native que retorna 'true'
+//  quando o usuario esta emulando sua aplicação em ambiente de desenvolvimento
+
+if (__DEV__) {
+  // host: endereco do computador
+  const tron = Reactotron.configure({ host: '192.168.0.12' })
+    .useReactNative()
+    .connect();
+
+  /**
+   * Para facilitar o acesso a configuração do reactotron
+   * a atribuimos a uma nova propriedade do 'console', que é
+   * uma variavel global na aplicação. Assim não precisaremos
+   * fazer uma importação toda vez que quisermos chamar 'tron'
+   * basta da um 'console.tron'
+   */
+  console.tron = tron;
+
+  // Limpa a timeline quando damos um refresh
+  tron.clear();
+}
+```
+
+4. Importamos no arquivo desejado e toda vez que realizarmos um 'console.tron.log()' ele vai aparecer na timeline do reactotron
+
+## React Navigation
