@@ -127,6 +127,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
     'import/prefer-default-export': 'off',
+    'react/static-property-placement': 'enabled',
   },
 };
 ```
@@ -243,3 +244,48 @@ protected ReactActivityDelegate createReactActivityDelegate() {
 
 - createAppContainer: é como se fosse o browserRouter do reactJS, ele contem as configurações pro nosso roteamento funcionar. Ele precisa sempre estar por volta das rotas
 - createStackNavigator: contem um tipo de configuração de rotas
+
+## Styled Components
+
+- Adiciona a dependência
+  > yarn add styled-components
+- Cria arquivos separados para estilizar os componentes
+- A grande diferença do 'Styled-Component' no react-native para o reactJS, esta na importação, onde devemos usar o 'native' no final, e na chamada do componente que se deseja estilizar no 'styled', pois não temos componentes como 'div, h1, h2' e sim 'Text, View' etc
+
+```js
+import styled from 'styled-components/native';
+
+export const Main = styled.View``;
+```
+
+### OBS:
+
+- No react-native não conseguimos utilzar o encadeamento para estilizar elemento dentro de outro elemento. Todo componente que precisarmos estilizar tem que ter um styled-component separado
+- Também não conseguimos definir estilos globais para a nossa aplicação
+
+## Estilizando formulário
+
+- Adicionamos uma biblioteca para trabalharmos com icones
+
+  > yarn add react-native-vector-icons
+
+- Cria o link com o codigo nativo
+  > react-native link react-native-vector-icons
+- Roda o yarn para atualizar as depedências
+  > yarn
+- Iniciamos novamente o app para que ele possa carregar as alterações nativas
+  > react-native run-android
+
+## Salvando no storage
+
+- Adicionamos uma biblioteca que serve como banco de dados local
+  > yarn add @react-native-community/async-storage
+- Fazermos o linkin dessa biblioteca
+  > react-native link @react-native-community/async-storage
+- Iniciamos o app novamente
+  > react-native run-android
+
+## Realizando navegação
+
+- Adicionamos a dependencia 'prop-types' para realizarmos a validação das propriedades
+  > yarn add prop-types
