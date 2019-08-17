@@ -289,3 +289,26 @@ export const Main = styled.View``;
 
 - Adicionamos a dependencia 'prop-types' para realizarmos a validação das propriedades
   > yarn add prop-types
+- Validamos a propridade navigation e o parametro navigate
+
+```js
+static propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
+```
+
+- Passamos dados para a rota que se deseja navegar
+
+```js
+const { navigation } = this.props;
+navigation.navigate('User', { user });
+```
+
+- Pegamos esses dados através da propriedade getParam
+
+```js
+const { navigation } = this.props;
+const user = navigation.getParam('user');
+```
