@@ -195,7 +195,7 @@ if (__DEV__) {
 }
 ```
 
-4. Importamos no arquivo desejado e toda vez que realizarmos um 'console.tron.log()' ele vai aparecer na timeline do reactotron
+4. Importamos no arquivo base da aplicação e toda vez que realizarmos um 'console.tron.log()' ele vai aparecer na timeline do reactotron
 
 ## React Navigation
 

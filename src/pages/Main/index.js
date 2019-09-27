@@ -48,7 +48,7 @@ export default class Main extends Component {
       AsyncStorage.setItem('users', JSON.stringify(users));
     }
   }
-
+  
   handleAddUser = async () => {
     const { users, newUser } = this.state;
 
